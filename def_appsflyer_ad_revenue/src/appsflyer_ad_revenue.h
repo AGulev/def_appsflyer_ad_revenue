@@ -6,31 +6,39 @@
 
 namespace dmAppsflyerAdRevenue
 {
-    enum MediationNetwork
-    {
-        MN_IRONSOURCE = 1,
-        MN_APPLOVINMAX = 2,
-        MN_GOOGLEADMOB = 3,
-        MN_FYBER = 4,
-        MN_APPODEAL = 5,
-        MN_ADMOST = 6,
-        MN_TOPON = 7,
-        MN_TRADPLUS = 8,
-        MN_YANDEX = 9,
-        MN_CHARTBOOST = 10,
-        MN_UNITY = 11,
-        MN_CUSTOMMEDIATION = 12,
-    };
+    static const char* MN_IRONSOURCE = "ironsource";
+    static const char* MN_APPLOVINMAX = "applovinmax";
+    static const char* MN_GOOGLEADMOB = "googleadmob";
+    static const char* MN_FYBER = "fyber";
+    static const char* MN_APPODEAL = "appodeal";
+    static const char* MN_ADMOST = "Admost";
+    static const char* MN_TOPON = "Topon";
+    static const char* MN_TRADPLUS = "Tradplus";
+    static const char* MN_YANDEX = "Yandex";
+    static const char* MN_CHARTBOOST = "chartboost";
+    static const char* MN_UNITY = "Unity";
+    static const char* MN_CUSTOMMEDIATION = "customMediation";
+    static const char* MN_DIRECT_MONETIZATION = "directMonetizationNetwork";
 
-    enum AdType
-    {
-        AT_REWARDED = 1,
-        AT_INTERSTITIAL = 2,
-    };
+    static const char* PROP_COUNTRY = "country";
+    static const char* PROP_AD_UNIT = "ad_unit";
+    static const char* PROP_AD_TYPE = "ad_type";
+    static const char* PROP_PLACEMENT = "placement";
+    static const char* PROP_ECPM_PAYLOAD = "ecpm_payload";
+
+    static const char* AD_TYPE_BANNER = "BANNER";
+    static const char* AD_TYPE_INTERSTITIAL = "INTERSTITIAL";
+    static const char* AD_TYPE_NATIVE = "NATIVE";
+    static const char* AD_TYPE_REWARDED = "REWARDED";
+    static const char* AD_TYPE_APP_OPEN = "APP_OPEN";
 
     void Initialize_Ext();
     void Initialize();
-    void LogAdRevenue(int ad_type, int mediationNetworkConst, const char *network, double revenue, const char *adUnitId, const char *placement);
+
+    void OpenEvent();
+    void AddParamString(const char* param_name, const char* param);
+    void SendEvent(const char* monetization_network, const char* mediation_network, const char* event_revenue_currency, double event_revenue);
+    void CloseEvent();
 
 } // namespace
 

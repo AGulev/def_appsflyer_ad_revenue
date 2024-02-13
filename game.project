@@ -1,5 +1,17 @@
 [project]
 title = def_appsflyer_ad_revenue
+developer = 
+dependencies#0 = https://github.com/AGulev/defold-extension-appsflyer/archive/refs/heads/master.zip
 
 [library]
 include_dirs = def_appsflyer_ad_revenue
+
+[bootstrap]
+main_collection = /example/main.collectionc
+
+[input]
+game_binding = /builtins/input/all.input_bindingc
+
+[android]
+package = com.defold.test.appsflyer.adrevenue
+

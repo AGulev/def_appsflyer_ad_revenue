@@ -5,7 +5,7 @@
 
 #*****************************************************************************************************
 
-  - name: init
+  - name: initialize
     type: function
 
 #*****************************************************************************************************
@@ -14,10 +14,82 @@
     type: function
 
     parameters:
-      - name: mediation_network_const
-        type: number
-      - name: network
+      - name: monetization_network
         type: string
-      - name: revenue
+      - name: mediation_network
+        type: string
+      - name: event_revenue_currency
+        type: string
+      - name: event_revenue
         type: number
+      - name: custom_params
+        type: table
 
+  - name: MN_IRONSOURCE
+    type: string
+
+  - name: MN_APPLOVINMAX
+    type: string
+
+  - name: MN_GOOGLEADMOB
+    type: string
+
+  - name: MN_FYBER
+    type: string
+
+  - name: MN_APPODEAL
+    type: string
+
+  - name: MN_ADMOST
+    type: string
+
+  - name: MN_TOPON
+    type: string
+
+  - name: MN_TRADPLUS
+    type: string
+
+  - name: MN_YANDEX
+    type: string
+
+  - name: MN_CHARTBOOST
+    type: string
+
+  - name: MN_UNITY
+    type: string
+
+  - name: MN_CUSTOMMEDIATION
+    type: string
+
+  - name: MN_DIRECT_MONETIZATION
+    type: string
+
+  - name: PROP_COUNTRY
+    type: string
+
+  - name: PROP_AD_UNIT
+    type: string
+
+  - name: PROP_AD_TYPE
+    type: string
+
+  - name: PROP_PLACEMENT
+    type: string
+
+  - name: PROP_ECPM_PAYLOAD
+    type: string
+
+  - name: AD_TYPE_BANNER
+    type: string
+
+  - name: AD_TYPE_INTERSTITIAL
+    type: string
+
+  - name: AD_TYPE_NATIVE
+    type: string
+
+  - name: AD_TYPE_REWARDED
+    type: string
+
+  - name: AD_TYPE_APP_OPEN
+    type: string

@@ -25,13 +25,28 @@ namespace dmAppsflyerAdRevenue
     static int Lua_LogAdRevenue(lua_State *L)
     {
         DM_LUA_STACK_CHECK(L, 0);
-        int ad_type = lua_tointeger(L, 1);
-        int mediationNetworkConst = lua_tointeger(L, 2);
-        const char *network = lua_tostring(L, 3);
-        double revenue = lua_tonumber(L, 4);
-        const char *adUnitId = lua_tostring(L, 5);
-        const char *placement = lua_tostring(L, 6);
-        LogAdRevenue(ad_type, mediationNetworkConst, network, revenue, adUnitId, placement);
+
+        const char* monetization_network = luaL_checkstring(L, 1);
+        const char* mediation_network = luaL_checkstring(L, 2);
+        const char* event_revenue_currency = luaL_checkstring(L, 3);
+        double event_revenue = luaL_checknumber(L, 4);
+
+        luaL_checktype(L, 5, LUA_TTABLE);
+        OpenEvent();
+        lua_pushvalue(L, 5);
+        lua_pushnil(L);
+        while (lua_next(L, -2) != 0)
+        {
+            const char* param_name = lua_tostring(L, -2);
+            const char* param_value = luaL_checkstring(L, -1);
+            AddParamString(param_name, param_value);
+            lua_pop(L, 1);
+        }
+
+        SendEvent(monetization_network, mediation_network, event_revenue_currency, event_revenue);
+        CloseEvent();
+        lua_pop(L, 1);
+        
         return 0;
     }
 
@@ -46,7 +61,7 @@ namespace dmAppsflyerAdRevenue
         DM_LUA_STACK_CHECK(L, 0);
         luaL_register(L, MODULE_NAME, Module_methods);
 #define SETCONSTANT(name)                \
-    lua_pushnumber(L, (lua_Number)name); \
+    lua_pushstring(L, name); \
     lua_setfield(L, -2, #name);
 
         SETCONSTANT(MN_IRONSOURCE)
@@ -61,8 +76,19 @@ namespace dmAppsflyerAdRevenue
         SETCONSTANT(MN_CHARTBOOST)
         SETCONSTANT(MN_UNITY)
         SETCONSTANT(MN_CUSTOMMEDIATION)
-        SETCONSTANT(AT_REWARDED)
-        SETCONSTANT(AT_INTERSTITIAL)
+        SETCONSTANT(MN_DIRECT_MONETIZATION)
+
+        SETCONSTANT(PROP_COUNTRY)
+        SETCONSTANT(PROP_AD_UNIT)
+        SETCONSTANT(PROP_AD_TYPE)
+        SETCONSTANT(PROP_PLACEMENT)
+        SETCONSTANT(PROP_ECPM_PAYLOAD)
+
+        SETCONSTANT(AD_TYPE_BANNER)
+        SETCONSTANT(AD_TYPE_INTERSTITIAL)
+        SETCONSTANT(AD_TYPE_NATIVE)
+        SETCONSTANT(AD_TYPE_REWARDED)
+        SETCONSTANT(AD_TYPE_APP_OPEN)
 
 #undef SETCONSTANT
         lua_pop(L, 1);
